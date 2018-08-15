@@ -1,17 +1,30 @@
 # Default values for baggywrinkle.
-# This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+nameOverride: "boat"
 replicaCount: 1
 
-image:
-  repository: pcr-internal.puppet.net/eric.putnam/helmregistrywebclient
-  tag: latest
-  pullPolicy: IfNotPresent
+frontend:
+  image:
+    repository: pcr-internal.puppet.net/eric.putnam/helmregistrywebclient
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    name: "frontend"
+    label: "frontend"
+    type: LoadBalancer
+    port: 3000
 
-service:
-  type: ClusterIP
-  port: 3000
+backend:
+  image:
+    repository: pcr-internal.puppet.net/eric.putnam/helmregistryapi
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    name: "backend"
+    label: "backend"
+    type: ClusterIP
+    port: 8080
 
 ingress:
   enabled: false
