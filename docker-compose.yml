@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  frontend:
+    image: pcr-internal.puppet.net/eric.putnam/helmregistrywebclient
+    links:
+      - backend
+    ports:
+      - "3000:3000"
+  
+  backend:
+    image: pcr-internal.puppet.net/eric.putnam/helmregistryapi
+    ports:
+      - "8080:8080"
+
